@@ -3,7 +3,6 @@ package com.talent;
 public class ChessAttacks {
 	final static String PLAYING = "BLACK"; // "WHITE"
 
-	
 	public static int isInLineOfPawn(int rowDiff, int colDiff) {
 		if (PLAYING.equals("WHITE")) {
 			return Math.abs(colDiff) == 1 && rowDiff == -1 ? 1 : 0;
