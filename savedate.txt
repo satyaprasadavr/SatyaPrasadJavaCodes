@@ -1,0 +1,8 @@
+/* Problem statement */
+Positions of 2 pieces no chess board
+
+If both pieces attack each ohter, return 4
+If 1st coin attacks 2nd then return   1
+If 2nd coin attacks 1st then return  2
+neither coin attacks each other return  0
+================================================
