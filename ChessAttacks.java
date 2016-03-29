@@ -47,27 +47,55 @@ public class ChessAttacks {
 		int rowPosOther = getRowPosition(otherPosition);
 		int colDiff = colPosOne - colPosOther;
 		int rowDiff = rowPosOne - rowPosOther;
-		int sum = 0;
+
+		int sumA = 0;
+		int sumB = 0;
 		if (coinOne.toUpperCase().equals("PAWN")) {
-			sum += isInLineOfPawn(rowDiff, colDiff);
+			sumA = isInLineOfPawn(rowDiff, colDiff);
 		}
-		if (coinOne.toUpperCase().equals("ELEPHANT")) {
-			sum += isInLineOfElephant(rowDiff, colDiff);
-		}
-		if (coinOne.toUpperCase().equals("BISHOP")) {
-			sum += isInLineOfBishop(rowDiff, colDiff);
-		}
-		if (coinOne.toUpperCase().equals("KNIGHT")) {
-			sum += isInLineOfKnight(rowDiff, colDiff);
-		}
-		if (coinOne.toUpperCase().equals("KING")) {
-			sum += isInLineOfKing(rowDiff, colDiff);
-		}
-		if (coinOne.toUpperCase().equals("QUEEN")) {
-			sum += isInLineOfQueen(rowDiff, colDiff);
+		if (coinOther.toUpperCase().equals("PAWN")) {
+			sumB = isInLineOfPawn(rowDiff * -1, colDiff * -1);
 		}
 
-		return sum;
+		if (coinOne.toUpperCase().equals("ELEPHANT")) {
+			sumA = isInLineOfElephant(rowDiff, colDiff);
+		}
+
+		if (coinOther.toUpperCase().equals("ELEPHANT")) {
+			sumB = isInLineOfElephant(rowDiff * -1, colDiff * -1);
+		}
+
+		if (coinOne.toUpperCase().equals("BISHOP")) {
+			sumA = isInLineOfBishop(rowDiff, colDiff);
+		}
+
+		if (coinOther.toUpperCase().equals("BISHOP")) {
+			sumB = isInLineOfBishop(rowDiff * -1, colDiff * -1);
+		}
+
+		if (coinOne.toUpperCase().equals("KNIGHT")) {
+			sumA = isInLineOfKnight(rowDiff, colDiff);
+		}
+		if (coinOther.toUpperCase().equals("KNIGHT")) {
+			sumB = isInLineOfKnight(rowDiff * -1, colDiff * -1);
+		}
+
+		if (coinOne.toUpperCase().equals("KING")) {
+			sumA += isInLineOfKing(rowDiff, colDiff);
+		}
+		if (coinOther.toUpperCase().equals("KING")) {
+			sumB += isInLineOfKing(rowDiff * -1, colDiff * -1);
+		}
+
+		if (coinOne.toUpperCase().equals("QUEEN")) {
+			sumA += isInLineOfQueen(rowDiff, colDiff);
+		}
+
+		if (coinOther.toUpperCase().equals("QUEEN")) {
+			sumB += isInLineOfQueen(rowDiff * -1, colDiff * -1);
+		}
+		return (sumA+sumB==2)?4:(sumA==1)?1:(sumB==1)?2:0;
+		
 	}
 
 	public static void main(String[] args) {
@@ -77,6 +105,10 @@ public class ChessAttacks {
 		System.out.println(checkAttack("KNIGHT", "C3", "PAWN", "B5"));
 		System.out.println(checkAttack("KING", "D3", "PAWN", "C2"));
 		System.out.println(checkAttack("QUEEN", "I1", "PAWN", "J1"));
+		System.out.println(checkAttack("QUEEN", "I1", "QUEEN", "J1"));
+		System.out.println(checkAttack("BISHOP", "A3", "KNIGHT", "A4"));
+		System.out.println(checkAttack("BISHOP", "A3", "KNIGHT", "B4"));
+		System.out.println(checkAttack("BISHOP", "A3", "KING", "B3"));
 
 	}
 }
